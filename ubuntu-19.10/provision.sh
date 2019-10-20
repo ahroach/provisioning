@@ -5,6 +5,7 @@ USER=`(whoami)`
 ## The basics
 sudo apt-get install vim-gtk3 git unzip p7zip-full wget xxd screen mosh brightnessctl links dos2unix
 sudo usermod -aG dialout $USER
+sudo usermod -aG video $USER
 # Install hexdiff
 git clone https://github.com/ahroach/hexdiff
 pushd hexdiff
@@ -47,6 +48,8 @@ sudo apt-get install ipython3 python3-numpy python3-scipy python3-matplotlib
 
 ## libvirt virtualization
 # sudo apt-get install virt-manager
+# sudo usermod -aG libvirt $USER
+# sudo usermod -aG libvirt-qemu $USER
 
 ## VirtualBox virtualization
 # sudo apt-get install virtualbox
