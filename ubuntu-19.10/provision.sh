@@ -3,7 +3,7 @@
 USER=`(whoami)`
 
 ## The basics
-sudo apt-get install vim-gtk3 git unzip p7zip-full wget xxd screen mosh brightnessctl links dos2unix
+sudo apt-get install vim-gtk3 git unzip p7zip-full wget xxd screen mosh brightnessctl links curl dos2unix units
 sudo usermod -aG dialout $USER
 sudo usermod -aG video $USER
 # Install hexdiff
@@ -44,7 +44,8 @@ sudo apt-get install net-tools nmap netcat-openbsd netcat-traditional
 # sudo usermod -aG wireshark $USER
 
 ## Python
-sudo apt-get install ipython3 python3-numpy python3-scipy python3-matplotlib
+sudo apt-get install ipython3
+# sudo apt-get install python3-numpy python3-scipy python3-matplotlib
 
 ## libvirt virtualization
 # sudo apt-get install virt-manager
@@ -59,8 +60,12 @@ sudo apt-get install ipython3 python3-numpy python3-scipy python3-matplotlib
 # sudo groupadd docker
 # sudo usermod -aG docker $USER
 
-## Hardware
-# sudo apt-get install sigrok pulseview putty gtkterm openocd urjtag flashrom can-utils 
+## Generic hardware
+# sudo apt-get install sigrok pulseview putty gtkterm python3-serial
+# sudo apt-get install openocd urjtag flashrom
+
+## CAN
+# sudo apt-get install python3-can can-utils
 
 ## AVR
 # sudo apt-get install avr-libc gcc-avr avrdude gdb-avr
