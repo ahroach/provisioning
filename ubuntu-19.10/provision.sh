@@ -65,6 +65,7 @@ fi
 if [ "$INSTALL_SWAY" = true ]
 then
 	apt-get -yq install sakura sway swaylock swayidle i3status zenity jq suckless-tools
+	apt-get -yq install qtwayland5
 	mkdir -p /home/$USER/.config/sway
 	cp ../config/sway.config /home/$USER/.config/sway/config
 	chown $USER:$USER /home/$USER/.config/sway/config
@@ -77,7 +78,7 @@ if [ "$INSTALL_WIRESHARK" = true ]
 then
 	# Install setuid to allow capture by wireshark group members
 	echo wireshark-common wireshark-common/install-setuid boolean true | debconf-set-selections
-	apt-get -yq install wireshark
+	apt-get -yq install wireshark qtwayland5
 	groupadd wireshark
 	usermod -aG wireshark $USER
 fi
