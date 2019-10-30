@@ -32,8 +32,9 @@ fi
 
 if [ "$INSTALL_BASICS" = true ]
 then
-	apt-get -yq install vim-gtk3 git unzip p7zip-full xxd screen mosh brightnessctl dos2unix units bless
+	apt-get -yq install vim-gtk3 git unzip p7zip-full xxd screen mosh dos2unix units bless
 	apt-get -yq install wget links curl net-tools nmap netcat-openbsd netcat-traditional
+	apt-get -yq install laptop-mode-tools rfkill brightnessctl
 	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib
 	usermod -aG dialout $USER
 	usermod -aG video $USER
