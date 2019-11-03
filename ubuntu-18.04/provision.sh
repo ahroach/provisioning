@@ -1,0 +1,164 @@
+#!/bin/bash
+
+INSTALL_BASICS=true
+INSTALL_I3=true
+INSTALL_WIRESHARK=false
+INSTALL_BINARY_ANALYSIS=false
+INSTALL_LIBVIRT=false
+INSTALL_VIRTUALBOX=false
+INSTALL_DOCKER=false
+INSTALL_DOCKER_SCANNING_IMAGES=false
+INSTALL_FIRMWARE=false
+INSTALL_HARDWARE=false
+INSTALL_HARDWARE_CAN=false
+INSTALL_HARDWARE_AVR=false
+INSTALL_HARDWARE_ESP=false
+
+export DEBIAN_FRONTEND=noninteractive
+USER=`(logname)`
+
+if [ $(id -u) -ne 0 ]
+then
+	echo "This script must be run as root. (Use sudo.)"
+	exit 1
+fi
+
+apt-get update
+if [ $? -ne 0 ]
+then
+	echo "Apt update failed. Check network connection or for competing apt processes."
+	exit 1
+fi
+
+if [ "$INSTALL_BASICS" = true ]
+then
+	apt-get -yq install vim-gtk3 git unzip p7zip-full xxd screen mosh dos2unix units bless
+	apt-get -yq install wget links curl net-tools nmap netcat-openbsd netcat-traditional
+	apt-get -yq install laptop-mode-tools rfkill brightnessctl
+	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib
+	usermod -aG dialout $USER
+	usermod -aG video $USER
+	# Install hexdiff
+	git clone https://github.com/ahroach/hexdiff
+	pushd hexdiff
+	gcc -o hexdiff hexdiff.c
+	cp hexdiff /usr/local/bin
+	popd
+	rm -rf hexdiff
+	# Install binexplore
+	git clone https://github.com/ahroach/binexplore
+	pushd binexplore
+	mkdir -p /usr/lib/python3/dist-packages/binexplore/
+	cp * /usr/lib/python3/dist-packages/binexplore/
+	popd
+	rm -rf binexplore
+	# Install diffcount
+	git clone https://github.com/ahroach/diffcount
+	pushd diffcount
+	gcc -mpopcnt -O3 -o diffcount diffcount.c
+	cp diffcount /usr/local/bin
+	popd
+	rm -rf diffcount
+	# Install carve
+	cp ../bin/carve /usr/local/bin
+fi
+
+if [ "$INSTALL_I3" = true ]
+then
+	apt-get -yq install i3 i3lock i3status
+	apt-get -yq install compton network-manager-gnome zenity jq suckless-tools
+	mkdir -p /home/$USER/.config/i3
+	cp ../config/i3.config /home/$USER/.config/i3/config
+	chown $USER:$USER /home/$USER/.config/i3/config
+	mkdir -p /home/$USER/.config/sakura
+	cp ../config/sakura.conf /home/$USER/.config/sakura/sakura.conf
+	chown $USER:$USER /home/$USER/.config/sakura/sakura.conf
+fi
+
+if [ "$INSTALL_WIRESHARK" = true ]
+then
+	# Install setuid to allow capture by wireshark group members
+	echo wireshark-common wireshark-common/install-setuid boolean true | debconf-set-selections
+	apt-get -yq install wireshark
+	groupadd wireshark
+	usermod -aG wireshark $USER
+fi
+
+if [ "$INSTALL_BINARY_ANALYSIS" = true ]
+then
+	apt-get -yq install gdb gdbserver edb-debugger elfutils
+	git clone --depth 1 https://github.com/radareorg/radare2.git
+	# Install radare2
+	pushd radare2/sys
+	./install.sh --install
+	popd
+	rm -rf radare2
+	# Install Ghidra
+	apt-get -yq install openjdk-11-jdk openjdk-11-jdk-headless openjdk-11-jre openjdk-11-jre-headless
+	# Ugly hack to get current Ghidra download link
+	wget -r -A "*.zip" -l 1 -O ghidra-latest.zip https://www.ghidra-sre.org
+	unzip ghidra-latest.zip -d /usr/local
+	# If there happen to be multiple ghidra installations (there shouldn't), just
+	# link to the first one we find
+	ghidras=(/usr/local/ghidra*)
+	ln -s ${ghidras[0]}/ghidraRun /usr/local/bin/ghidra
+	rm ghidra-latest.zip
+fi
+
+if [ "$INSTALL_LIBVIRT" = true ]
+then
+	apt-get -yq install libvirt0 libvirt-daemon libvirt-daemon-system virt-manager virt-viewer
+	groupadd libvirt
+	usermod -aG libvirt $USER
+	groupadd libvirt-qemu
+	usermod -aG libvirt-qemu $USER
+fi
+
+if [ "$INSTALL_VIRTUALBOX" = true ]
+then
+	apt-get -yq install virtualbox
+	groupadd vboxusers
+	usermod -aG vboxusers $USER
+	groupadd vboxsf
+	usermod -aG vboxsf $USER
+fi
+
+if [ "$INSTALL_DOCKER" = true ]
+then
+	apt-get -yq install docker.io
+	groupadd docker
+	usermod -aG docker $USER
+fi
+
+if [ "$INSTALL_DOCKER_SCANNING_IMAGES" = true ]
+then
+	docker pull metasploitframework/metasploit-framework
+	docker pull mikesplain/openvas
+fi
+
+if [ "$INSTALL_FIRMWARE" = true ]
+then
+	apt-get -yq install binwalk squashfs-tools
+fi
+
+if [ "$INSTALL_HARDWARE" = true ]
+then
+	apt-get -yq install sigrok pulseview putty gtkterm python3-serial
+	apt-get -yq install openocd urjtag flashrom
+fi
+
+if [ "$INSTALL_HARDWARE_CAN" = true ]
+then
+	apt-get -yq install python3-can can-utils
+fi
+
+if [ "$INSTALL_HARDWARE_AVR" = true ]
+then
+	apt-get -yq install avr-libc gcc-avr avrdude gdb-avr simavr
+fi
+
+if [ "$INSTALL_HARDWARE_ESP" = true ]
+then
+	apt-get -yq install esptool
+fi
+
