@@ -66,7 +66,7 @@ fi
 if [ "$INSTALL_I3" = true ]
 then
 	apt-get -yq install i3 i3lock i3status
-	apt-get -yq install compton network-manager-gnome zenity jq suckless-tools
+	apt-get -yq install sakura compton network-manager-gnome zenity jq suckless-tools
 	mkdir -p /home/$USER/.config/i3
 	cp ../config/i3.config /home/$USER/.config/i3/config
 	chown $USER:$USER /home/$USER/.config/i3/config
