@@ -2,7 +2,7 @@
 
 INSTALL_BASICS=true
 INSTALL_SWAY=true
-INSTALL_WIRESHARK=false
+INSTALL_NETWORK_ANALYSIS=false
 INSTALL_BINARY_ANALYSIS=false
 INSTALL_LIBVIRT=false
 INSTALL_VIRTUALBOX=false
@@ -75,13 +75,15 @@ then
 	chown $USER:$USER /home/$USER/.config/sakura/sakura.conf
 fi
 
-if [ "$INSTALL_WIRESHARK" = true ]
+if [ "$INSTALL_NETWORK_ANALYSIS" = true ]
 then
 	# Install setuid to allow capture by wireshark group members
 	echo wireshark-common wireshark-common/install-setuid boolean true | debconf-set-selections
 	apt-get -yq install wireshark qtwayland5
 	groupadd wireshark
 	usermod -aG wireshark $USER
+	apt-get -yq install python3-scapy
+	apt-get -yq install tcpreplay
 fi
 
 if [ "$INSTALL_BINARY_ANALYSIS" = true ]
