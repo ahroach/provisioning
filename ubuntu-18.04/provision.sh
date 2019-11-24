@@ -2,6 +2,7 @@
 
 INSTALL_BASICS=true
 INSTALL_I3=true
+INSTALL_LAPTOP_TOOLS=false
 INSTALL_NETWORK_ANALYSIS=false
 INSTALL_BINARY_ANALYSIS=false
 INSTALL_LIBVIRT=false
@@ -34,7 +35,6 @@ if [ "$INSTALL_BASICS" = true ]
 then
 	apt-get -yq install vim-gtk3 git unzip p7zip-full xxd screen mosh dos2unix units bless
 	apt-get -yq install wget links curl net-tools nmap netcat-openbsd netcat-traditional
-	apt-get -yq install laptop-mode-tools rfkill brightnessctl
 	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib
 	usermod -aG dialout $USER
 	usermod -aG video $USER
@@ -73,6 +73,10 @@ then
 	mkdir -p /home/$USER/.config/sakura
 	cp ../config/sakura.conf /home/$USER/.config/sakura/sakura.conf
 	chown $USER:$USER /home/$USER/.config/sakura/sakura.conf
+fi
+
+if [ "$INSTALL_LAPTOP_TOOLS" = true ]
+	apt-get -yq install laptop-mode-tools rfkill brightnessctl upower
 fi
 
 if [ "$INSTALL_NETWORK_ANALYSIS" = true ]
