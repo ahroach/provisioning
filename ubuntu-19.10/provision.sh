@@ -76,6 +76,7 @@ then
 fi
 
 if [ "$INSTALL_LAPTOP_TOOLS" = true ]
+then
 	apt-get -yq install laptop-mode-tools rfkill brightnessctl upower
 fi
 
