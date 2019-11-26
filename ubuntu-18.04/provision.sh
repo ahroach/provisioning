@@ -39,6 +39,7 @@ then
 	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib
 	usermod -aG dialout $USER
 	usermod -aG video $USER
+	usermod -aG input $USER
 	# Install hexdiff
 	git clone https://github.com/ahroach/hexdiff
 	pushd hexdiff
