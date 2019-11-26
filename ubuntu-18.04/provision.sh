@@ -37,6 +37,7 @@ then
 	apt-get -yq install wget links curl net-tools nmap netcat-openbsd netcat-traditional
 	apt-get -yq install build-essential autoconf automake flex bison
 	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib
+	apt-get -yq install ufw gufw
 	usermod -aG dialout $USER
 	usermod -aG video $USER
 	usermod -aG input $USER
