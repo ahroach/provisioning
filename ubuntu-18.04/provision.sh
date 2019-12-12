@@ -80,7 +80,7 @@ fi
 
 if [ "$INSTALL_LAPTOP_TOOLS" = true ]
 then
-	apt-get -yq install laptop-mode-tools rfkill brightnessctl upower
+	apt-get -yq install laptop-mode-tools rfkill brightnessctl upower powertop
 	apt-get -yq install pavucontrol pulsemixer
 fi
 

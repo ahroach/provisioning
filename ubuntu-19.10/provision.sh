@@ -81,7 +81,7 @@ fi
 
 if [ "$INSTALL_LAPTOP_TOOLS" = true ]
 then
-	apt-get -yq install laptop-mode-tools rfkill brightnessctl upower
+	apt-get -yq install laptop-mode-tools rfkill brightnessctl upower powertop
 	apt-get -yq install pavucontrol pulsemixer
 	cat > /etc/udev/rules.d/backlight.rules << EOF
 ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
