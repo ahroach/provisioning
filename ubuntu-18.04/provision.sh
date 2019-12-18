@@ -3,6 +3,7 @@
 INSTALL_BASICS=true
 INSTALL_I3=true
 INSTALL_LAPTOP_TOOLS=false
+INSTALL_PRESENTATION_TOOLS=false
 INSTALL_NETWORK_ANALYSIS=false
 INSTALL_BINARY_ANALYSIS=false
 INSTALL_LIBVIRT=false
@@ -82,6 +83,11 @@ if [ "$INSTALL_LAPTOP_TOOLS" = true ]
 then
 	apt-get -yq install laptop-mode-tools rfkill brightnessctl upower powertop
 	apt-get -yq install pavucontrol pulsemixer
+fi
+
+if [ "$INSTALL_PRESENTATION_TOOLS" = true ]
+	apt-get -yq install cheese guvcview v4l-utils
+	apt-get -yq install xournal
 fi
 
 if [ "$INSTALL_NETWORK_ANALYSIS" = true ]

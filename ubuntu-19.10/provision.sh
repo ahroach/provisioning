@@ -3,6 +3,7 @@
 INSTALL_BASICS=true
 INSTALL_SWAY=true
 INSTALL_LAPTOP_TOOLS=false
+INSTALL_PRESENTATION_TOOLS=false
 INSTALL_NETWORK_ANALYSIS=false
 INSTALL_BINARY_ANALYSIS=false
 INSTALL_LIBVIRT=false
@@ -87,6 +88,11 @@ then
 ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
 ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
 EOF
+fi
+
+if [ "$INSTALL_PRESENTATION_TOOLS" = true ]
+	apt-get -yq install cheese guvcview v4l-utils
+	apt-get -yq install xournal
 fi
 
 if [ "$INSTALL_NETWORK_ANALYSIS" = true ]
