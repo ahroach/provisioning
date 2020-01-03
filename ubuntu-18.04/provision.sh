@@ -86,6 +86,7 @@ then
 fi
 
 if [ "$INSTALL_PRESENTATION_TOOLS" = true ]
+then
 	apt-get -yq install cheese guvcview v4l-utils
 	apt-get -yq install xournal
 fi
