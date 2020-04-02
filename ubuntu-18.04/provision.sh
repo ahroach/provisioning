@@ -107,8 +107,10 @@ then
 	apt-get -yq install gdb gdbserver edb-debugger elfutils
 	git clone --depth 1 https://github.com/radareorg/radare2.git
 	# Install radare2
-	pushd radare2/sys
-	./install.sh --install
+	pushd radare2
+	sys/debian.sh
+	dpkg -i radare2_*.deb
+	dpkg -i radare2-dev_*.deb
 	popd
 	rm -rf radare2
 	# Install Ghidra
