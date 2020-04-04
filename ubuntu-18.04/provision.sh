@@ -39,6 +39,7 @@ then
 	apt-get -yq install build-essential autoconf automake flex bison
 	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib
 	apt-get -yq install ufw gufw
+	apt-get -yq install pavucontrol pulsemixer
 	usermod -aG dialout $USER
 	usermod -aG video $USER
 	usermod -aG input $USER
@@ -82,13 +83,14 @@ fi
 if [ "$INSTALL_LAPTOP_TOOLS" = true ]
 then
 	apt-get -yq install laptop-mode-tools rfkill brightnessctl upower powertop
-	apt-get -yq install pavucontrol pulsemixer
 fi
 
 if [ "$INSTALL_PRESENTATION_TOOLS" = true ]
 then
 	apt-get -yq install cheese guvcview v4l-utils
 	apt-get -yq install xournal
+	apt-get -yq install texlive texlive-latex-recommended texlive-latex-extra
+	apt-get -yq install inkscape gimp krita
 fi
 
 if [ "$INSTALL_NETWORK_ANALYSIS" = true ]

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 INSTALL_BASICS=true
-INSTALL_SWAY=true
+INSTALL_I3=true
 INSTALL_LAPTOP_TOOLS=false
 INSTALL_PRESENTATION_TOOLS=false
 INSTALL_NETWORK_ANALYSIS=false
@@ -41,9 +41,9 @@ then
 	apt-get -yq install ufw gufw
 	apt-get -yq install pavucontrol pulsemixer
 	usermod -aG dialout $USER
-	usermod -aG audio $USER
 	usermod -aG video $USER
 	usermod -aG input $USER
+	usermod -aG sudo $USER
 	# Install hexdiff
 	git clone https://github.com/ahroach/hexdiff
 	pushd hexdiff
@@ -69,13 +69,13 @@ then
 	cp ../bin/carve /usr/local/bin
 fi
 
-if [ "$INSTALL_SWAY" = true ]
+if [ "$INSTALL_I3" = true ]
 then
-	apt-get -yq install sakura sway swaylock swayidle i3status zenity jq suckless-tools
-	apt-get -yq install qtwayland5
-	mkdir -p /home/$USER/.config/sway
-	cp ../config/sway.config /home/$USER/.config/sway/config
-	chown $USER:$USER /home/$USER/.config/sway/config
+	apt-get -yq install i3 i3lock i3status xautolock
+	apt-get -yq install sakura compton network-manager-gnome zenity jq suckless-tools
+	mkdir -p /home/$USER/.config/i3
+	cp ../config/i3.config /home/$USER/.config/i3/config
+	chown $USER:$USER /home/$USER/.config/i3/config
 	mkdir -p /home/$USER/.config/sakura
 	cp ../config/sakura.conf /home/$USER/.config/sakura/sakura.conf
 	chown $USER:$USER /home/$USER/.config/sakura/sakura.conf
@@ -84,10 +84,6 @@ fi
 if [ "$INSTALL_LAPTOP_TOOLS" = true ]
 then
 	apt-get -yq install laptop-mode-tools rfkill brightnessctl upower powertop
-	cat > /etc/udev/rules.d/backlight.rules << EOF
-ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
-ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
-EOF
 fi
 
 if [ "$INSTALL_PRESENTATION_TOOLS" = true ]
@@ -102,7 +98,7 @@ if [ "$INSTALL_NETWORK_ANALYSIS" = true ]
 then
 	# Install setuid to allow capture by wireshark group members
 	echo wireshark-common wireshark-common/install-setuid boolean true | debconf-set-selections
-	apt-get -yq install wireshark qtwayland5
+	apt-get -yq install wireshark
 	groupadd wireshark
 	usermod -aG wireshark $USER
 	apt-get -yq install python3-scapy
@@ -130,8 +126,6 @@ then
 	ghidras=(/usr/local/ghidra*)
 	ln -s ${ghidras[0]}/ghidraRun /usr/local/bin/ghidra
 	rm ghidra-latest.zip
-	# Make things better on Wayland
-	echo "_JAVA_AWT_WM_NONREPARENTING=1" >> /etc/environment
 fi
 
 if [ "$INSTALL_LIBVIRT" = true ]
