@@ -176,7 +176,7 @@ fi
 
 if [ "$INSTALL_HARDWARE_AVR" = true ]
 then
-	apt-get -yq install avr-libc gcc-avr avrdude gdb-avr simavr
+	apt-get -yq install avr-libc gcc-avr avrdude gdb-avr simavr libsimavr-dev
 fi
 
 if [ "$INSTALL_HARDWARE_ESP" = true ]
