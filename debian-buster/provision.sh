@@ -92,6 +92,10 @@ then
 	apt-get -yq install xournal
 	apt-get -yq install texlive texlive-latex-recommended texlive-latex-extra
 	apt-get -yq install inkscape gimp krita
+	cp ../bin/disable_screen_blank.sh /usr/local/bin
+	cp ../bin/enable_screen_blank.sh /usr/local/bin
+	cp ../bin/wacom_restrict.sh /usr/local/bin
+
 fi
 
 if [ "$INSTALL_NETWORK_ANALYSIS" = true ]
