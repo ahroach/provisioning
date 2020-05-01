@@ -71,14 +71,18 @@ fi
 
 if [ "$INSTALL_SWAY" = true ]
 then
-	apt-get -yq install sakura sway swaylock swayidle i3status zenity jq suckless-tools
+	apt-get -yq install sakura gnome-terminal sway swaylock swayidle i3status zenity jq suckless-tools libglib2.0-bin
 	apt-get -yq install qtwayland5
+	# Sef default sway config
 	mkdir -p /home/$USER/.config/sway
 	cp ../config/sway.config /home/$USER/.config/sway/config
 	chown $USER:$USER /home/$USER/.config/sway/config
+	# Set default sakura config
 	mkdir -p /home/$USER/.config/sakura
 	cp ../config/sakura.conf /home/$USER/.config/sakura/sakura.conf
 	chown $USER:$USER /home/$USER/.config/sakura/sakura.conf
+	# Set default gnome-terminal config
+	sudo -u $USER ../scripts/set_gnome-terminal_config.sh ../config/gnome-terminal.gsettings
 fi
 
 if [ "$INSTALL_LAPTOP_TOOLS" = true ]
