@@ -2,6 +2,7 @@
 
 INSTALL_BASICS=true
 INSTALL_SWAY=true
+INSTALL_I3=false
 INSTALL_LAPTOP_TOOLS=false
 INSTALL_PRESENTATION_TOOLS=false
 INSTALL_NETWORK_ANALYSIS=false
@@ -77,6 +78,22 @@ then
 	mkdir -p /home/$USER/.config/sway
 	cp ../config/sway.config /home/$USER/.config/sway/config
 	chown $USER:$USER /home/$USER/.config/sway/config
+	# Set default sakura config
+	mkdir -p /home/$USER/.config/sakura
+	cp ../config/sakura.conf /home/$USER/.config/sakura/sakura.conf
+	chown $USER:$USER /home/$USER/.config/sakura/sakura.conf
+	# Set default gnome-terminal config
+	sudo -u $USER ../scripts/set_gnome-terminal_config.sh ../config/gnome-terminal.gsettings
+fi
+
+if [ "$INSTALL_I3" = true ]
+then
+	apt-get -yq install i3 i3lock i3status xautolock
+	apt-get -yq install sakura gnome-terminal compton network-manager-gnome zenity jq suckless-tools libglib2.0-bin
+	# Set default i3 config
+	mkdir -p /home/$USER/.config/i3
+	cp ../config/i3.config /home/$USER/.config/i3/config
+	chown $USER:$USER /home/$USER/.config/i3/config
 	# Set default sakura config
 	mkdir -p /home/$USER/.config/sakura
 	cp ../config/sakura.conf /home/$USER/.config/sakura/sakura.conf
