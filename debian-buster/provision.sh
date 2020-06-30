@@ -40,6 +40,7 @@ then
 	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib
 	apt-get -yq install ufw gufw
 	apt-get -yq install pavucontrol pulsemixer
+	apt-get -yq install spice-vdagent spice-webdavd
 	usermod -aG dialout $USER
 	usermod -aG video $USER
 	usermod -aG input $USER
