@@ -82,6 +82,9 @@ then
 	chown $USER:$USER /home/$USER/.config/sakura/sakura.conf
 	# Set default gnome-terminal config
 	sudo -u $USER ../scripts/set_gnome-terminal_config.sh ../config/gnome-terminal.gsettings
+	# Provide spice-vdagent scripts
+	cp ../bin/spice_vdagent_set_i3_mode.sh /usr/local/bin
+	cp ../bin/spice_vdagent_unset_i3_mode.sh /usr/local/bin
 fi
 
 if [ "$INSTALL_LAPTOP_TOOLS" = true ]
