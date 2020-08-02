@@ -191,7 +191,7 @@ fi
 
 if [ "$INSTALL_FIRMWARE" = true ]
 then
-	apt-get -yq install binwalk squashfs-tools
+	apt-get -yq install binwalk squashfs-tools srecord
 fi
 
 if [ "$INSTALL_HARDWARE" = true ]
