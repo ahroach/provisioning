@@ -7,6 +7,7 @@ INSTALL_LAPTOP_TOOLS=false
 INSTALL_PRESENTATION_TOOLS=false
 INSTALL_NETWORK_ANALYSIS=false
 INSTALL_BINARY_ANALYSIS=false
+INSTALL_32BIT_SUPPORT=false
 INSTALL_LIBVIRT=false
 INSTALL_VIRTUALBOX=false
 INSTALL_DOCKER=false
@@ -156,6 +157,13 @@ then
 	rm ghidra-latest.zip
 	# Make things better on Wayland
 	echo "_JAVA_AWT_WM_NONREPARENTING=1" >> /etc/environment
+fi
+
+if [ "$INSTALL_32BIT_SUPPORT" = true ]
+then
+	dpkg --add-architecture i386
+	apt-get update
+	apt-get install libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386
 fi
 
 if [ "$INSTALL_LIBVIRT" = true ]
