@@ -6,6 +6,7 @@ INSTALL_LAPTOP_TOOLS=false
 INSTALL_PRESENTATION_TOOLS=false
 INSTALL_NETWORK_ANALYSIS=false
 INSTALL_BINARY_ANALYSIS=false
+INSTALL_32BIT_SUPPORT=false
 INSTALL_LIBVIRT=false
 INSTALL_VIRTUALBOX=false
 INSTALL_DOCKER=false
@@ -135,6 +136,11 @@ then
 	ghidras=(/usr/local/ghidra*)
 	ln -s ${ghidras[0]}/ghidraRun /usr/local/bin/ghidra
 	rm ghidra-latest.zip
+fi
+
+if [ "$INSTALL_32BIT_SUPPORT" = true ]
+then
+	apt-get -yq install libc6-i386
 fi
 
 if [ "$INSTALL_LIBVIRT" = true ]

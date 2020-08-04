@@ -143,9 +143,7 @@ fi
 
 if [ "$INSTALL_32BIT_SUPPORT" = true ]
 then
-	dpkg --add-architecture i386
-	apt-get update
-	apt-get install libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386
+	apt-get -yq install libc6-i386
 fi
 
 if [ "$INSTALL_LIBVIRT" = true ]
