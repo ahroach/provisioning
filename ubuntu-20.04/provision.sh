@@ -39,7 +39,8 @@ then
 	apt-get -yq install vim-gtk3 git unzip p7zip-full xxd screen mosh dos2unix units bless
 	apt-get -yq install wget links curl net-tools nmap netcat-openbsd netcat-traditional
 	apt-get -yq install build-essential autoconf automake cmake flex bison
-	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib
+	apt-get -yq install libssl-dev
+	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib python3-pip
 	apt-get -yq install ufw gufw
 	apt-get -yq install pavucontrol pulsemixer
 	usermod -aG dialout $USER
