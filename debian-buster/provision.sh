@@ -8,7 +8,6 @@ INSTALL_NETWORK_ANALYSIS=false
 INSTALL_BINARY_ANALYSIS=false
 INSTALL_32BIT_SUPPORT=false
 INSTALL_LIBVIRT=false
-INSTALL_VIRTUALBOX=false
 INSTALL_DOCKER=false
 INSTALL_DOCKER_SCANNING_IMAGES=false
 INSTALL_FIRMWARE=false
@@ -154,15 +153,6 @@ then
 	usermod -aG libvirt $USER
 	groupadd libvirt-qemu
 	usermod -aG libvirt-qemu $USER
-fi
-
-if [ "$INSTALL_VIRTUALBOX" = true ]
-then
-	apt-get -yq install virtualbox
-	groupadd vboxusers
-	usermod -aG vboxusers $USER
-	groupadd vboxsf
-	usermod -aG vboxsf $USER
 fi
 
 if [ "$INSTALL_DOCKER" = true ]
