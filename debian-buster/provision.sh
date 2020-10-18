@@ -120,7 +120,7 @@ fi
 
 if [ "$INSTALL_BINARY_ANALYSIS" = true ]
 then
-	apt-get -yq install gdb gdbserver edb-debugger elfutils
+	apt-get -yq install gdb gdbserver edb-debugger elfutils patchelf
 	git clone --depth 1 https://github.com/radareorg/radare2.git
 	# Install radare2
 	pushd radare2
