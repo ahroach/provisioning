@@ -32,6 +32,10 @@ then
 	exit 1
 fi
 
+apt-get -yq install software-properties-common
+add-apt-repository contrib
+add-apt-repository non-free
+
 if [ "$INSTALL_BASICS" = true ]
 then
 	apt-get -yq install vim-gtk3 git unzip p7zip-full xxd screen mosh dos2unix units bless
