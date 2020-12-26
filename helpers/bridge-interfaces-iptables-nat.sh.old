@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# To serve DHCP, configure the local IP manually and
+# add something like the following to /etc/dnsmasq.conf:
+# interface=enp2s0
+# bind-interfaces
+# dhcp-range=192.168.40.100,192.168.40.255
+
+INET_IFACE=enp0s20u3c4i2
+LOCAL_IFACE=enp2s0
+
+sudo sysctl net.ipv4.ip_forward=1
+
+sudo iptables -t nat -A POSTROUTING -o $INET_IFACE -j MASQUERADE
+sudo iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i $LOCAL_IFACE -o $INET_IFACE -j ACCEPT
+
+# Can make these permanent by:
+# - editing sysctl.conf
+# - 'iptables-save > /etc/iptables.ipv4.nat'
+# - create script in /etc/network/if-pre-up.d/
+#   with 'iptables-restore < /etc/iptables.ipv4.nat'
+
