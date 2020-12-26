@@ -6,6 +6,7 @@ INSTALL_LAPTOP_TOOLS=false
 INSTALL_PRESENTATION_TOOLS=false
 INSTALL_NETWORK_ANALYSIS=false
 INSTALL_BINARY_ANALYSIS=false
+INSTALL_CTF_TOOLS=false
 INSTALL_32BIT_SUPPORT=false
 INSTALL_LIBVIRT=false
 INSTALL_DOCKER=false
@@ -31,6 +32,10 @@ then
 	echo "Apt update failed. Check network connection or for competing apt processes."
 	exit 1
 fi
+
+apt-get -yq install software-properties-common
+add-apt-repository contrib
+add-apt-repository non-free
 
 if [ "$INSTALL_BASICS" = true ]
 then
@@ -139,6 +144,27 @@ then
 	ghidras=(/usr/local/ghidra*)
 	ln -s ${ghidras[0]}/ghidraRun /usr/local/bin/ghidra
 	rm ghidra-latest.zip
+fi
+
+if [ "$INSTALL_CTF_TOOLS" = true ]
+then
+	# Install pwntools
+	apt-get -yq install python3 python3-pip python3-dev git libssl-dev libffi-dev build-essential 
+	python3 -m pip install --upgrade pip
+	python3 -m pip install --upgrade pwntools
+
+	# Install pwndbg
+	apt-get -y install git gdb python3-dev python3-pip python3-setuptools libglib2.0-dev libc6-dbg
+	mkdir -p /home/$USER/git
+	pushd /home/$USER/git
+	sudo -u $USER git clone https://github.com/pwndbg/pwndbg
+	cd pwndbg
+	./setup.sh
+	# Add source manually, since setup.sh won't know correct user
+	if ! grep pwndbg /home/$USER/.gdbinit &>/dev/null; then
+		echo "source $PWD/gdbinit.py" >> /home/$USER/.gdbinit
+	fi
+	popd
 fi
 
 if [ "$INSTALL_32BIT_SUPPORT" = true ]
