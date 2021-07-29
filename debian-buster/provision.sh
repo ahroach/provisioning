@@ -134,10 +134,21 @@ then
 	dpkg -i radare2-dev_*.deb
 	popd
 	rm -rf radare2
+
 	# Install Ghidra
 	apt-get -yq install openjdk-11-jdk openjdk-11-jdk-headless openjdk-11-jre openjdk-11-jre-headless
-	# Ugly hack to get current Ghidra download link
-	wget -r -A "*.zip" -l 1 -O ghidra-latest.zip https://www.ghidra-sre.org
+	# Needed for Github API interaction
+	apt-get -yq install curl wget jq
+	# Always get the latest version, which should be returned first
+	asset_id=`curl -H "Accept: application/vnd.github.v3.raw" \
+		-s https://api.github.com/repos/NationalSecurityAgency/ghidra/releases \
+		| jq ".[0].assets[0].id"`
+	if [ "$asset_id" != "null" ]; then
+		wget -q \
+		  --header='Accept:application/octet-stream' \
+		  https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/assets/$asset_id \
+		  -O ghidra-latest.zip
+	fi
 	unzip ghidra-latest.zip -d /usr/local
 	# If there happen to be multiple ghidra installations (there shouldn't), just
 	# link to the first one we find
