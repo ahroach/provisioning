@@ -13,6 +13,7 @@ INSTALL_LIBVIRT=false
 INSTALL_VIRTUALBOX=false
 INSTALL_DOCKER=false
 INSTALL_DOCKER_SCANNING_IMAGES=false
+INSTALL_EMULATION=false
 INSTALL_FIRMWARE=false
 INSTALL_HARDWARE=false
 INSTALL_HARDWARE_CAN=false
@@ -227,6 +228,11 @@ if [ "$INSTALL_DOCKER_SCANNING_IMAGES" = true ]
 then
 	docker pull metasploitframework/metasploit-framework
 	docker pull mikesplain/openvas
+fi
+
+if [ "$INSTALL_EMULATION" = true ]
+then
+	apt-get -yq install qemu-user
 fi
 
 if [ "$INSTALL_FIRMWARE" = true ]
