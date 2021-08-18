@@ -208,7 +208,7 @@ fi
 
 if [ "$INSTALL_EMULATION" = true ]
 then
-	apt-get -yq install qemu-user
+	apt-get -yq install qemu-user qemu-system
 	apt-get -yq install libc6-armel-cross libc6-arm64-cross
 	apt-get -yq install libgcc1-armel-cross libgcc1-arm64-cross
 	apt-get -yq install gdb-multiarch
