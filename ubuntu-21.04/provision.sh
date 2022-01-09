@@ -121,7 +121,7 @@ fi
 if [ "$INSTALL_PRESENTATION_TOOLS" = true ]
 then
 	apt-get -yq install cheese guvcview v4l-utils
-	apt-get -yq install xournal gromit-mpx
+	apt-get -yq install xournal gromit-mpx magnus
 	apt-get -yq install texlive texlive-latex-recommended texlive-latex-extra
 	apt-get -yq install inkscape gimp krita
 fi
