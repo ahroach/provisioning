@@ -81,11 +81,11 @@ then
 	# Sef default sway config
 	mkdir -p /home/$USER/.config/sway
 	cp ../config/sway.config /home/$USER/.config/sway/config
-	chown $USER:$USER /home/$USER/.config/sway/config
+	chown -R $USER:$USER /home/$USER/.config/sway
 	# Set default sakura config
 	mkdir -p /home/$USER/.config/sakura
 	cp ../config/sakura.conf /home/$USER/.config/sakura/sakura.conf
-	chown $USER:$USER /home/$USER/.config/sakura/sakura.conf
+	chown -R $USER:$USER /home/$USER/.config/sakura
 	# Set default gnome-terminal config
 	sudo -u $USER ../scripts/set_gnome-terminal_config.sh ../config/gnome-terminal.gsettings
 fi
@@ -97,11 +97,11 @@ then
 	# Set default i3 config
 	mkdir -p /home/$USER/.config/i3
 	cp ../config/i3.config /home/$USER/.config/i3/config
-	chown $USER:$USER /home/$USER/.config/i3/config
+	chown -R $USER:$USER /home/$USER/.config/i3
 	# Set default sakura config
 	mkdir -p /home/$USER/.config/sakura
 	cp ../config/sakura.conf /home/$USER/.config/sakura/sakura.conf
-	chown $USER:$USER /home/$USER/.config/sakura/sakura.conf
+	chown -R $USER:$USER /home/$USER/.config/sakura
 	# Set default gnome-terminal config
 	sudo -u $USER ../scripts/set_gnome-terminal_config.sh ../config/gnome-terminal.gsettings
 	# Provide spice-vdagent scripts
@@ -184,6 +184,7 @@ then
 	# Install pwndbg
 	apt-get -y install git gdb python3-dev python3-pip python3-setuptools libglib2.0-dev libc6-dbg
 	mkdir -p /home/$USER/git
+	chown -R $USER:$USER /home/$USER/git
 	pushd /home/$USER/git
 	sudo -u $USER git clone https://github.com/pwndbg/pwndbg
 	cd pwndbg
@@ -191,6 +192,7 @@ then
 	# Add source manually, since setup.sh won't know correct user
 	if ! grep pwndbg /home/$USER/.gdbinit &>/dev/null; then
 		echo "source $PWD/gdbinit.py" >> /home/$USER/.gdbinit
+		chown $USER:$USER /home/$USER/.gdbinit
 	fi
 	popd
 fi
