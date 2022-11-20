@@ -160,7 +160,7 @@ then
 	rm -rf radare2
 
 	# Install Ghidra
-	apt-get -yq install openjdk-11-jdk openjdk-11-jdk-headless openjdk-11-jre openjdk-11-jre-headless
+	apt-get -yq install openjdk-17-jdk openjdk-17-jdk-headless openjdk-17-jre openjdk-17-jre-headless
 	# Needed for Github API interaction
 	apt-get -yq install curl wget jq
 	# Always get the latest version, which should be returned first
