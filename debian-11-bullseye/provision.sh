@@ -49,6 +49,7 @@ then
 	apt-get -yq install ufw gufw
 	apt-get -yq install pavucontrol pulsemixer
 	apt-get -yq install spice-vdagent spice-webdavd
+	apt-get -yq install blueman
 	usermod -aG dialout $USER
 	usermod -aG audio $USER
 	usermod -aG video $USER

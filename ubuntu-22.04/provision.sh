@@ -45,6 +45,7 @@ then
 	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib python3-pip
 	apt-get -yq install ufw gufw
 	apt-get -yq install pavucontrol pulsemixer
+	apt-get -yq install blueman
 	usermod -aG dialout $USER
 	usermod -aG audio $USER
 	usermod -aG video $USER
