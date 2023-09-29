@@ -95,6 +95,8 @@ then
 	chown -R $USER:$USER /home/$USER/.config/sakura
 	# Set default gnome-terminal config
 	sudo -u $USER ../scripts/set_gnome-terminal_config.sh ../config/gnome-terminal.gsettings
+	# Provide scripts
+	cp ../bin/sway-inhibit-idle.sh /usr/local/bin
 fi
 
 if [ "$INSTALL_I3" = true ]
