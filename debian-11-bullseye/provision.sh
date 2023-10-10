@@ -85,6 +85,7 @@ then
 	# swaylock not available in Bullseye
 	apt-get -yq install sakura gnome-terminal sway swayidle wofi i3status zenity jq suckless-tools libglib2.0-bin
 	apt-get -yq install qtwayland5
+	apt-get -yq install xdg-desktop-portal-wlr wl-clipboard wf-recorder grimshot
 	# Sef default sway config
 	mkdir -p /home/$USER/.config/sway
 	cp ../config/sway.config /home/$USER/.config/sway/config

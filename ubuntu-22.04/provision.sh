@@ -79,6 +79,7 @@ if [ "$INSTALL_SWAY" = true ]
 then
 	apt-get -yq install sakura gnome-terminal sway swaylock swayidle wofi i3status zenity jq suckless-tools libglib2.0-bin
 	apt-get -yq install qtwayland5
+	apt-get -yq install xdg-desktop-portal-wlr wl-clipboard wf-recorder grimshot
 	# Sef default sway config
 	mkdir -p /home/$USER/.config/sway
 	cp ../config/sway.config /home/$USER/.config/sway/config
