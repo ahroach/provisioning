@@ -42,14 +42,16 @@ then
 	apt-get -yq install wget links curl net-tools nmap netcat-openbsd netcat-traditional
 	apt-get -yq install build-essential autoconf automake cmake flex bison
 	apt-get -yq install libssl-dev
-	apt-get -yq install ipython3 python3-crypto python3-numpy python3-matplotlib python3-pip
+	apt-get -yq install ipython3 python3-pycryptodome python3-numpy python3-matplotlib python3-pip
 	apt-get -yq install ufw gufw
 	apt-get -yq install pavucontrol pulsemixer
+	apt-get -yq install spice-vdagent spice-webdavd
 	apt-get -yq install blueman
 	usermod -aG dialout $USER
 	usermod -aG audio $USER
 	usermod -aG video $USER
 	usermod -aG input $USER
+	usermod -aG sudo $USER
 	# Install hexdiff
 	git clone https://github.com/ahroach/hexdiff
 	pushd hexdiff
@@ -111,6 +113,10 @@ then
 	# Provide spice-vdagent scripts
 	cp ../bin/spice_vdagent_set_i3_mode.sh /usr/local/bin
 	cp ../bin/spice_vdagent_unset_i3_mode.sh /usr/local/bin
+	# And other helpful i3 scripts 
+	cp ../bin/disable_screen_blank.sh /usr/local/bin
+	cp ../bin/enable_screen_blank.sh /usr/local/bin
+	cp ../bin/wacom_restrict.sh /usr/local/bin
 fi
 
 if [ "$INSTALL_LAPTOP_TOOLS" = true ]
@@ -188,7 +194,7 @@ then
 	# Install pwndbg
 	apt-get -y install git gdb python3-dev python3-pip python3-setuptools libglib2.0-dev libc6-dbg
 	mkdir -p /home/$USER/git
-	chown $USER:$USER /home/$USER/git
+	chown -R $USER:$USER /home/$USER/git
 	pushd /home/$USER/git
 	sudo -u $USER git clone https://github.com/pwndbg/pwndbg
 	cd pwndbg

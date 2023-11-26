@@ -117,6 +117,7 @@ then
 	# Provide spice-vdagent scripts
 	cp ../bin/spice_vdagent_set_i3_mode.sh /usr/local/bin
 	cp ../bin/spice_vdagent_unset_i3_mode.sh /usr/local/bin
+	# And other helpful i3 scripts 
 	cp ../bin/disable_screen_blank.sh /usr/local/bin
 	cp ../bin/enable_screen_blank.sh /usr/local/bin
 	cp ../bin/wacom_restrict.sh /usr/local/bin
