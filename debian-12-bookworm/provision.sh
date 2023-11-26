@@ -17,7 +17,6 @@ INSTALL_FIRMWARE=false
 INSTALL_HARDWARE=false
 INSTALL_HARDWARE_CAN=false
 INSTALL_HARDWARE_AVR=false
-INSTALL_HARDWARE_ESP=false
 
 export DEBIAN_FRONTEND=noninteractive
 USER=`(logname)`
@@ -266,10 +265,5 @@ fi
 if [ "$INSTALL_HARDWARE_AVR" = true ]
 then
 	apt-get -yq install avr-libc gcc-avr avrdude gdb-avr simavr libsimavr-dev
-fi
-
-if [ "$INSTALL_HARDWARE_ESP" = true ]
-then
-	apt-get -yq install esptool
 fi
 
